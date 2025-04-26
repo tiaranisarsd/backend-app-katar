@@ -3,9 +3,9 @@ const prisma = new PrismaClient();
 import fs from 'fs';
 import path from 'path';
 
-export const getTentangKegiatan = async (req, res) => {
+export const gettentang_kegiatan = async (req, res) => {
     try {
-        const response = await prisma.tentangKegiatan.findMany({
+        const response = await prisma.tentang_kegiatan.findMany({
             select: {
                 id: true,
                 uuid: true,
@@ -21,9 +21,9 @@ export const getTentangKegiatan = async (req, res) => {
     }
 };
 
-export const getTentangKegiatanById = async (req, res) => {
+export const gettentang_kegiatanById = async (req, res) => {
     try {
-        const tentangKegiatan = await prisma.tentangKegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
                 uuid: req.params.id,
             },
@@ -36,20 +36,20 @@ export const getTentangKegiatanById = async (req, res) => {
                 keterangan: true
             }
         });
-        if (!tentangKegiatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
+        if (!tentang_kegiatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
-        res.status(200).json(tentangKegiatan);
+        res.status(200).json(tentang_kegiatan);
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
 };
 
-export const createTentangKegiatan = async (req, res) => {
+export const createtentang_kegiatan = async (req, res) => {
     try {
         const { judulKegiatan, tanggal, keterangan } = req.body;
         const image = req.file ? req.file.filename : '';
 
-        const newTentangKegiatan = await prisma.tentangKegiatan.create({
+        const newtentang_kegiatan = await prisma.tentang_kegiatan.create({
             data: {
                 uuid: crypto.randomUUID(),
                 judulKegiatan: judulKegiatan,
@@ -60,34 +60,34 @@ export const createTentangKegiatan = async (req, res) => {
                 updatedAt: new Date()
             }
         });
-        res.status(201).json({ msg: "Tentang Kegiatan Created Successfully", tentangKegiatan: newTentangKegiatan });
+        res.status(201).json({ msg: "Tentang Kegiatan Created Successfully", tentang_kegiatan: newtentang_kegiatan });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
 };
 
-export const updateTentangKegiatan = async (req, res) => {
+export const updatetentang_kegiatan = async (req, res) => {
     try {
-        const tentangKegiatan = await prisma.tentangKegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
                 uuid: req.params.id
             }
         });
-        if (!tentangKegiatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
+        if (!tentang_kegiatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
         const { judulKegiatan, tanggal, keterangan } = req.body;
-        let image = tentangKegiatan.image; // gunakan gambar yang sudah ada
+        let image = tentang_kegiatan.image; // gunakan gambar yang sudah ada
 
          // Handle image update
         if (req.file) {
-            const imagePath = path.join(process.cwd(), 'uploads/tentangKegiatan', tentangKegiatan.image);
+            const imagePath = path.join(process.cwd(), 'uploads/tentang_kegiatan', tentang_kegiatan.image);
             if (fs.existsSync(imagePath)) {
                 fs.unlinkSync(imagePath);
             }
             image = req.file.filename;
         }
 
-        const updatedTentangKegiatan = await prisma.tentangKegiatan.update({
+        const updatedtentang_kegiatan = await prisma.tentang_kegiatan.update({
             where: {
                 uuid: req.params.id,
             },
@@ -100,33 +100,33 @@ export const updateTentangKegiatan = async (req, res) => {
             }
         });
 
-        res.status(200).json({ msg: "Tentang Kegiatan updated successfully", tentangKegiatan: updatedTentangKegiatan });
+        res.status(200).json({ msg: "Tentang Kegiatan updated successfully", tentang_kegiatan: updatedtentang_kegiatan });
     } catch (error) {
-        console.error("Error in updateTentangKegiatan:", error);
+        console.error("Error in updatetentang_kegiatan:", error);
         res.status(500).json({ msg: error.message });
     }
 };
 
-export const deleteTentangKegiatan = async (req, res) => {
+export const deletetentang_kegiatan = async (req, res) => {
     try {
-        const tentangKegiatan = await prisma.tentangKegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
                 uuid: req.params.id
             }
         });
 
-        if (!tentangKegiatan) {
+        if (!tentang_kegiatan) {
             console.error("Data not found");
             return res.status(404).json({ msg: "Data tidak ditemukan" });
         }
 
-        // Hapus file gambar dari folder uploads/tentangKegiatan
-        const imagePath = path.join(process.cwd(), 'uploads/tentangKegiatan', tentangKegiatan.image);
+        // Hapus file gambar dari folder uploads/tentang_kegiatan
+        const imagePath = path.join(process.cwd(), 'uploads/tentang_kegiatan', tentang_kegiatan.image);
         if (fs.existsSync(imagePath)) {
              fs.unlinkSync(imagePath);
         }
 
-        await prisma.tentangKegiatan.delete({
+        await prisma.tentang_kegiatan.delete({
             where: {
                 uuid: req.params.id,
             }
@@ -134,15 +134,15 @@ export const deleteTentangKegiatan = async (req, res) => {
 
         res.status(200).json({ msg: "Tentang Kegiatan deleted successfully" });
     } catch (error) {
-        console.error("Error in deleteTentangKegiatan:", error);
+        console.error("Error in deletetentang_kegiatan:", error);
         res.status(500).json({ msg: error.message });
     }
 };
 
 export default {
-    getTentangKegiatan,
-    getTentangKegiatanById,
-    createTentangKegiatan,
-    updateTentangKegiatan,
-    deleteTentangKegiatan,
+    gettentang_kegiatan,
+    gettentang_kegiatanById,
+    createtentang_kegiatan,
+    updatetentang_kegiatan,
+    deletetentang_kegiatan,
 };
