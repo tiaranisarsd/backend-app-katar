@@ -117,7 +117,7 @@ export const createPendaftaran = async (req, res) => {
                 rw: parseInt(rw),
                 lombaId: parseInt(lombaId),
                 categoryId: parseInt(categoryId),
-                userId: req.userId,
+                userId: parseInt(userId),
                 createdAt: new Date(),
                 updatedAt: new Date()
             }
