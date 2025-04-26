@@ -1,0 +1,273 @@
+//Create a user
+POST http://localhost:5001/users
+Content-Type: application/json
+
+{
+    "name": "users",
+    "email": "users@gmail.com",
+    "password": "users",
+    "confPassword": "users",
+    "role": "users"
+}
+
+###
+//get All Users
+GET http://localhost:5001/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjUwMDA5LCJleHAiOjE3NDU2NTM2MDl9.IoUDecFpUECAhhNXassCUExDk0HPYPfkuTyjbzF3xDU
+
+###
+//Get Single Users
+GET http://localhost:6000//users/ad71feda-fc92-476b-bdc2-e670be7f347d
+
+###
+//Update Users
+PATCH http://localhost:6000//users/c2c1b1d0-f640-4bc2-941d-f914a9f73c1c
+Content-Type: application/json
+
+{
+    "name": "Tiaranisarsd",
+    "email": "tiaranisars@gmail.com",
+    "password": "admin",
+    "confPassword": "admin",
+    "role": "admin"
+}
+
+###
+//Delete a Users
+DELETE http://localhost:6000//users/7b42670f-20ad-4a9d-9324-7fccd4fcce42
+
+###
+// Login Users
+POST http://localhost:5001/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin"
+}
+
+###
+// Login sebagai Users
+POST http://localhost:6000/login
+Content-Type: application/json
+
+{
+    "email": "tiaranisars@gmail.com",
+    "password": "admin"
+}
+
+###
+GET http://localhost:6000/me
+
+###
+DELETE http://localhost:6000/logout
+
+
+###
+// Get All Pendaftaran
+GET http://localhost:6000//pendaftaran
+
+###
+// Get Single Pendaftaran
+GET http://localhost:6000//pendaftaran/cc7c016b-ac7b-4f03-b565-94bc23a66e48
+
+###
+// POST Data Pendaftaran
+POST http://localhost:6000//pendaftaran
+Content-Type: application/json
+
+{
+    "name": "testssss rw2",
+    "rw": 8,
+    "lombaId": 23,
+    "categoryId": 25
+}
+
+###
+// UPDATE Data Pendaftaran
+PATCH http://localhost:6000//pendaftaran/c3b5ba7e-a63b-4ba5-9174-82d46a4a05ec
+Content-Type: application/json
+
+{
+    "name": "testssss rw2 updated",
+    "rw": 6,
+    "lombaId": 23,
+    "categoryId": 25
+}
+
+###
+// Delete Data Pendaftaran
+DELETE http://localhost:6000//pendaftaran/b1664db9-a8ff-483b-8d4f-06a60915417
+
+
+###
+// Get All Lomba
+GET http://localhost:6000//lomba
+
+###
+// Get All Category
+GET http://localhost:6000//category
+
+###
+// POST Data Category
+POST http://localhost:6000//category
+Content-Type: application/json
+
+{
+    
+    "categoryName": "Single Putra",
+    "lombaId": "2"
+}
+
+###
+//Update Lomba
+PATCH http://localhost:6000//lomba/fe0beebe-95f9-4a9c-a4cc-dd50c95ec5d9
+Content-Type: application/json
+
+{
+"lombaName": "test update"
+}
+
+###
+//Update Category
+PATCH http://localhost:6000//category/99d30b1b-23fa-48fc-88b4-944345ec101f
+Content-Type: application/json
+
+{
+"categoryName": "Ganda Putra update"
+}
+
+###
+//Delete Lomba
+DELETE http://localhost:6000//lomba/4e535098-77d0-4dbb-a323-884aca705c97
+
+###
+//Delete Category
+DELETE http://localhost:6000//category/6f7cc3e7-a2e7-4337-9812-20c351cebf52
+
+###
+//Category By Lomba
+GET http://localhost:6000//category/lomba/1
+
+###
+// Get All Dashboard
+GET http://localhost:6000/Dashboard
+
+###
+// Get Single Dashboard
+GET http://localhost:6000/dashboard/97c2ec2f-85f1-4daa-876c-ee711cf7f0c9
+
+
+###
+// POST Data Dashboard
+POST http://localhost:6000/Dashboard
+Content-Type: application/json
+
+{
+    "lombaId": 22,
+    "imageUrl": "1720496226573-437123357.jpg",
+    "categoryId": "[13, 14]",
+    "aturanLomba": "<p>tesst </p>"
+}
+
+###
+//Update Data Dashboard
+PATCH http://localhost:6000//Dashboard/97c2ec2f-85f1-4daa-876c-ee711cf7f0c9
+Content-Type: application/json
+
+{
+
+    "lombaId": 12,
+    "imageUrl": "1720883725343-69949999.jpg",
+    "categoryId": "[13, 14]",
+    "aturanLomba": "<p>tesst updated 3 </p>"
+}
+
+###
+//Delete Data Dashboard
+DELETE http://localhost:6000/Dashboard/0204e099-b2a5-4feb-ac0d-1886b7fa62a9
+
+###
+// Get All Banner
+GET http://localhost:6000/Banner
+
+###
+// Get Single banner
+GET http://localhost:6000//banner/a94420e0-9e7d-4ea9-afe3-605b60cc88aa
+
+
+###
+// POST Data Banner
+POST http://localhost:6000//Banner
+Content-Type: application/json
+
+{
+
+    "bannerName": "test 4",
+    "imageBanner": "1720496226573-437123357.jpg"
+}
+
+###
+// Update Data Banner
+PATCH http://localhost:6000//banner/a94420e0-9e7d-4ea9-afe3-605b60cc88aa
+Content-Type: application/json
+
+{
+
+    "bannerName": "test 1",
+    "imageBanner": "1720962936493-392516406.jpg"
+}
+
+###
+//Delete Data Banner
+DELETE http://localhost:6000//Banner/gdvsdvsdfsf
+
+###
+// Get All Dokumentasi
+GET http://localhost:6000//Dokumentasi
+
+###
+// Get Single Dokumentasi
+GET http://localhost:6000//Dokumentasi/92223f36-7b5b-4500-ae84-2324025f8eee
+
+
+###
+// POST Data Dokumentasi
+POST http://localhost:6000//Dokumentasi
+Content-Type: application/json
+
+{
+
+    "kegiatanName": "test 3",
+    "imageKegiatan": "1720496226573-437123357.jpg"
+}
+
+###
+//Delete Data Dokuemntasi
+DELETE http://localhost:6000//Dokumentasi/f03e3889-8615-409c-a641-c64c5829028e
+
+###
+// Get All Tentang Kegiatan
+GET http://localhost:6000//TentangKegiatan
+
+###
+// Get Single TentangKegiatan
+GET http://localhost:6000//TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17
+
+
+###
+// POST Data TentangKegiatan
+POST http://localhost:6000//TentangKegiatan
+Content-Type: application/json
+
+{
+
+    "judulKegiatan": "test 1",
+    "image": "1720496226573-437123357.jpg",
+    "tanggal": "12/07/2024",
+    "keterangan": "test"
+}
+
+###
+//Delete Data TentangKegiatan
+DELETE http://localhost:6000//TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17

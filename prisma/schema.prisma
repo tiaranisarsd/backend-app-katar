@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model banner {
+    id          Int       @id @default(autoincrement())
+    uuid        String    @db.VarChar(50)
+    bannerName  String    @db.VarChar(30)
+    imageBanner String?   @db.VarChar(50)
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt// Perubahan pada tipe data
+}
+
+model category {
+    id           Int       @id @default(autoincrement())
+    uuid         String    @db.VarChar(50)
+    categoryName String    @db.VarChar(50)
+    lombaId      Int?
+    lomba        lomba?    @relation(fields: [lombaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+    pendaftaran  pendaftaran[]
+}
+
+model dashboard {
+    id          Int       @id @default(autoincrement())
+    uuid        String    @db.VarChar(255)
+    lombaId     Int
+    imageUrl    String?   @db.VarChar(255)
+    categoryId  String    @db.Text
+    aturanLomba String    @db.Text
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+    lomba       lomba     @relation(fields: [lombaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model dokumentasi {
+    id            Int       @id @default(autoincrement())
+    uuid          String    @db.VarChar(50)
+    kegiatanName  String    @db.VarChar(30)
+    imageKegiatan String?   @db.VarChar(50)
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+}
+
+model lomba {
+    id          Int       @id @default(autoincrement())
+    uuid        String    @db.VarChar(50)
+    lombaName   String    @db.VarChar(30)
+     createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+    category    category[]
+    dashboard   dashboard[]
+    pendaftaran pendaftaran[]
+}
+
+model pendaftaran {
+    id           Int       @id @default(autoincrement())
+    uuid         String    @db.VarChar(50)
+    name         String    @db.VarChar(30)
+    rw           Int?
+    lombaId      Int?
+    categoryId   Int?
+    userId       Int?
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+    lomba        lomba?     @relation(fields: [lombaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    category     category?  @relation(fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+    user         users?      @relation(fields: [userId], references: [id])
+}
+
+model sessions {
+    sid       String    @id @db.VarChar(36)
+    expires   DateTime? @db.Timestamp // Perubahan pada tipe data
+    data      String?   @db.Text
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+}
+
+model tentang_kegiatan {
+    id            Int       @id @default(autoincrement())
+    uuid          String    @db.VarChar(50)
+    judulKegiatan String?   @db.VarChar(30)
+    image         String?   @db.VarChar(50)
+    tanggal       DateTime? @db.Timestamp // Perubahan pada tipe data
+    keterangan    String    @db.Text
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+}
+
+model users {
+    id          Int       @id @default(autoincrement())
+    uuid        String    @db.VarChar(50)
+    name        String    @db.VarChar(25)
+    email       String    @db.VarChar(25)
+    password    String    @db.VarChar(100)
+    role        String    @db.VarChar(12)
+    createdAt DateTime @default(now()) //  Define createdAt as DateTime
+    updatedAt DateTime @updatedAt // Perubahan pada tipe data
+    pendaftaran pendaftaran[]
+
+    token token[]
+}
+
+model token {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      users     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  revoked   Boolean  @default(false)
+}
+
