@@ -59,7 +59,7 @@ export const createTentangKegiatan = async (req, res) => {
                 uuid: crypto.randomUUID(),
                 judulKegiatan: judulKegiatan,
                 image: imageUrl,  // Save the Cloudinary image URL
-                tanggal: tanggal,
+                tanggal: new Date(tanggal),
                 keterangan: keterangan,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -109,7 +109,7 @@ export const updateTentangKegiatan = async (req, res) => {
             data: {
                 judulKegiatan,
                 image: image, // Save the new Cloudinary image URL
-                tanggal,
+                tanggal: new Date(tanggal),
                 keterangan,
                 updatedAt: new Date()
             }

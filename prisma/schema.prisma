@@ -17,7 +17,7 @@ model banner {
     id          Int       @id @default(autoincrement())
     uuid        String    @db.VarChar(50)
     bannerName  String    @db.VarChar(30)
-    imageBanner String?   @db.VarChar(50)
+    imageBanner String?   @db.Text
     createdAt DateTime @default(now()) //  Define createdAt as DateTime
     updatedAt DateTime @updatedAt// Perubahan pada tipe data
 }
@@ -49,7 +49,7 @@ model dokumentasi {
     id            Int       @id @default(autoincrement())
     uuid          String    @db.VarChar(50)
     kegiatanName  String    @db.VarChar(30)
-    imageKegiatan String?   @db.VarChar(50)
+    imageKegiatan String?   @db.Text
     createdAt DateTime @default(now()) //  Define createdAt as DateTime
     updatedAt DateTime @updatedAt // Perubahan pada tipe data
 }
@@ -80,19 +80,12 @@ model pendaftaran {
     user         users?      @relation(fields: [userId], references: [id])
 }
 
-model sessions {
-    sid       String    @id @db.VarChar(36)
-    expires   DateTime? @db.Timestamp // Perubahan pada tipe data
-    data      String?   @db.Text
-    createdAt DateTime @default(now()) //  Define createdAt as DateTime
-    updatedAt DateTime @updatedAt // Perubahan pada tipe data
-}
 
 model tentang_kegiatan {
     id            Int       @id @default(autoincrement())
     uuid          String    @db.VarChar(50)
     judulKegiatan String?   @db.VarChar(30)
-    image         String?   @db.VarChar(50)
+    image         String?   @db.Text
     tanggal       DateTime? @db.Timestamp // Perubahan pada tipe data
     keterangan    String    @db.Text
     createdAt DateTime @default(now()) //  Define createdAt as DateTime

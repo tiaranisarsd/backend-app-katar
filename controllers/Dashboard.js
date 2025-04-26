@@ -91,7 +91,7 @@ export const createDashboard = async (req, res) => {
                 uuid: uuidv4(),
                 lombaId: parseInt(lombaId),
                 imageUrl: imageUrl,
-                categoryId: parsedCategoryId,
+                categoryId: parseInt(categoryId),
                 aturanLomba: aturanLomba,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -156,7 +156,7 @@ export const updateDashboard = async (req, res) => {
             data: {
                 lombaId: parseInt(lombaId),
                 imageUrl: imageUrl,
-                categoryId: categoryId,
+                categoryId: parseInt(categoryId),
                 aturanLomba: aturanLomba,
                 updatedAt: new Date()
             }
