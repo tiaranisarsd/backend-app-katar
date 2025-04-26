@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 import fs from 'fs';
 import path from 'path';
 
-export const gettentang_kegiatan = async (req, res) => {
+export const getTentangKegiatan = async (req, res) => {
     try {
         const response = await prisma.tentang_kegiatan.findMany({
             select: {
@@ -21,7 +21,7 @@ export const gettentang_kegiatan = async (req, res) => {
     }
 };
 
-export const gettentang_kegiatanById = async (req, res) => {
+export const getTentangKegiatanById = async (req, res) => {
     try {
         const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
@@ -44,7 +44,7 @@ export const gettentang_kegiatanById = async (req, res) => {
     }
 };
 
-export const createtentang_kegiatan = async (req, res) => {
+export const createTentangKegiatan = async (req, res) => {
     try {
         const { judulKegiatan, tanggal, keterangan } = req.body;
         const image = req.file ? req.file.filename : '';
@@ -66,7 +66,7 @@ export const createtentang_kegiatan = async (req, res) => {
     }
 };
 
-export const updatetentang_kegiatan = async (req, res) => {
+export const updateTentangKegiatan = async (req, res) => {
     try {
         const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
@@ -107,7 +107,7 @@ export const updatetentang_kegiatan = async (req, res) => {
     }
 };
 
-export const deletetentang_kegiatan = async (req, res) => {
+export const deleteTentangKegiatan = async (req, res) => {
     try {
         const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
             where: {
@@ -140,9 +140,9 @@ export const deletetentang_kegiatan = async (req, res) => {
 };
 
 export default {
-    gettentang_kegiatan,
-    gettentang_kegiatanById,
-    createtentang_kegiatan,
-    updatetentang_kegiatan,
-    deletetentang_kegiatan,
+    getTentangKegiatan,
+    getTentangKegiatanById,
+    createTentangKegiatan,
+    updateTentangKegiatan,
+    deleteTentangKegiatan,
 };
