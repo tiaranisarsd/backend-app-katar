@@ -115,8 +115,8 @@ export const createPendaftaran = async (req, res) => {
                 uuid: crypto.randomUUID(),
                 name: name,
                 rw: rw,
-                lombaId: lombaId,
-                categoryId: categoryId,
+                lombaId: parseInt(lombaId),
+                categoryId: parseInt(categoryId),
                 userId: req.userId,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -147,8 +147,8 @@ export const updatePendaftaran = async (req, res) => {
             data: {
                 name,
                 rw,
-                lombaId,
-                categoryId,
+                lombaId: parseInt(lombaId),
+                categoryId: parseInt(categoryId),
                 updatedAt: new Date()
             }
         });
