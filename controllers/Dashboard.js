@@ -63,12 +63,16 @@ export const createDashboard = async (req, res) => {
         const { lombaId, categoryId, aturanLomba } = req.body;
         const imageUrl = req.file ? req.file.path : ''; // Cloudinary URL
 
+        if (!lombaId || !categoryId || !aturanLomba) {
+            return res.status(400).json({ msg: "Semua field wajib diisi" });
+        }
+
         const newDashboard = await prisma.dashboard.create({
             data: {
                 uuid: uuidv4(),
                 lombaId: parseInt(lombaId),
-                imageUrl: imageUrl,
                 categoryId: parseInt(categoryId),
+                imageUrl: imageUrl,
                 aturanLomba: aturanLomba,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -81,6 +85,7 @@ export const createDashboard = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 };
+
 
 export const updateDashboard = async (req, res) => {
     try {
