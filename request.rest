@@ -1,5 +1,5 @@
 //Create a user
-POST http://localhost:5001/users
+POST https://backend-app-katar.vercel.app/users
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ###
 //get All Users
-GET http://localhost:5001/users
+GET https://backend-app-katar.vercel.app/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjUwMDA5LCJleHAiOjE3NDU2NTM2MDl9.IoUDecFpUECAhhNXassCUExDk0HPYPfkuTyjbzF3xDU
 
 ###
@@ -48,11 +48,11 @@ Content-Type: application/json
 
 ###
 // Login sebagai Users
-POST http://localhost:6000/login
+POST https://backend-app-katar.vercel.app/login
 Content-Type: application/json
 
 {
-    "email": "tiaranisars@gmail.com",
+    "email": "admin@gmail.com",
     "password": "admin"
 }
 
@@ -106,17 +106,19 @@ GET http://localhost:6000//lomba
 
 ###
 // Get All Category
-GET http://localhost:6000//category
+GET https://backend-app-katar.vercel.app/category
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjU1MTkzLCJleHAiOjE3NDU2NTg3OTN9.G6NZuuRk93mto3XFQYf_K5l3U_sWDxVAxIAHf5Vs8t0
 
 ###
 // POST Data Category
-POST http://localhost:6000//category
+POST https://backend-app-katar.vercel.app/category
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjU1MTkzLCJleHAiOjE3NDU2NTg3OTN9.G6NZuuRk93mto3XFQYf_K5l3U_sWDxVAxIAHf5Vs8t0
 
 {
     
     "categoryName": "Single Putra",
-    "lombaId": "2"
+    "lombaId": 1
 }
 
 ###
@@ -189,7 +191,8 @@ DELETE http://localhost:6000/Dashboard/0204e099-b2a5-4feb-ac0d-1886b7fa62a9
 
 ###
 // Get All Banner
-GET http://localhost:6000/Banner
+GET https://backend-app-katar.vercel.app/Banner
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjU1MTkzLCJleHAiOjE3NDU2NTg3OTN9.G6NZuuRk93mto3XFQYf_K5l3U_sWDxVAxIAHf5Vs8t0
 
 ###
 // Get Single banner
@@ -198,8 +201,9 @@ GET http://localhost:6000//banner/a94420e0-9e7d-4ea9-afe3-605b60cc88aa
 
 ###
 // POST Data Banner
-POST http://localhost:6000//Banner
+POST https://backend-app-katar.vercel.app/Banner
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjU1MTkzLCJleHAiOjE3NDU2NTg3OTN9.G6NZuuRk93mto3XFQYf_K5l3U_sWDxVAxIAHf5Vs8t0
 
 {
 

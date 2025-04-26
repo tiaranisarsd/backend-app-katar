@@ -49,7 +49,7 @@ export const getBannerById = async (req, res) => {
 export const createBanner = async (req, res) => {
     try {
         const { bannerName } = req.body;
-        const imageBanner = req.file ? req.file.filename : '';
+        const imageBanner = req.file ? req.file.path : ''; 
 
         const newBanner = await prisma.banner.create({
             data: {
@@ -67,6 +67,7 @@ export const createBanner = async (req, res) => {
     }
 };
 
+
 export const updateBanner = async (req, res) => {
     try {
         const banner = await prisma.banner.findUnique({
@@ -80,15 +81,11 @@ export const updateBanner = async (req, res) => {
         }
 
         const { bannerName } = req.body;
-        let imageBanner = banner.imageBanner; // default: gambar lama
+        let imageBanner = banner.imageBanner; // default pakai gambar lama
 
-        // Jika ada file baru diupload
+        // Kalau ada file baru diupload
         if (req.file) {
-            const oldImagePath = path.join(bannerDir, banner.imageBanner);
-            if (fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath); // hapus gambar lama
-            }
-            imageBanner = req.file.filename;
+            imageBanner = req.file.path; // path dari Cloudinary
         }
 
         const updatedBanner = await prisma.banner.update({
@@ -108,6 +105,7 @@ export const updateBanner = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 };
+
 
 export const deleteBanner = async (req, res) => {
     try {

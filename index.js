@@ -12,10 +12,7 @@ import BannerRoute from "./routes/BannerRoute.js";
 import DokumentasiRoute from "./routes/DokumentasiRoute.js";
 import TentangKegiatanRoute from "./routes/TentangKegiatanRoute.js";
 // import multer from "multer";
-import path from "path";
 import bodyParser from 'body-parser';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 dotenv.config();
 
@@ -31,14 +28,6 @@ app.get('/', (req, res) => {
   });
   
   export default app; 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/uploads/banner', express.static(path.join(__dirname, 'banner')));
-app.use('/uploads/dokumentasi', express.static(path.join(__dirname, 'dokumentasi')));
-app.use('/uploads/tentangKegiatan', express.static(path.join(__dirname, 'tentangKegiatan')));
 
 
 
