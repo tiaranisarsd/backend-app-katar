@@ -47,25 +47,30 @@ export const getTentangKegiatanById = async (req, res) => {
 export const createTentangKegiatan = async (req, res) => {
     try {
         const { judulKegiatan, tanggal, keterangan } = req.body;
-        const image = req.file ? req.file.filename : '';
+        
+        // Upload image to Cloudinary if exists
+        let imageUrl = '';
+        if (req.file) {
+            imageUrl = req.file.path; // This contains the Cloudinary URL
+        }
 
-        const newtentang_kegiatan = await prisma.tentang_kegiatan.create({
+        const newTentangKegiatan = await prisma.tentang_kegiatan.create({
             data: {
                 uuid: crypto.randomUUID(),
                 judulKegiatan: judulKegiatan,
-                image: image,
+                image: imageUrl,  // Save the Cloudinary image URL
                 tanggal: tanggal,
                 keterangan: keterangan,
                 createdAt: new Date(),
                 updatedAt: new Date()
             }
         });
-        res.status(201).json({ msg: "Tentang Kegiatan Created Successfully", tentang_kegiatan: newtentang_kegiatan });
+
+        res.status(201).json({ msg: "Tentang Kegiatan Created Successfully", tentang_kegiatan: newTentangKegiatan });
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
 };
-
 export const updateTentangKegiatan = async (req, res) => {
     try {
         const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
@@ -73,39 +78,50 @@ export const updateTentangKegiatan = async (req, res) => {
                 uuid: req.params.id
             }
         });
+
         if (!tentang_kegiatan) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
         const { judulKegiatan, tanggal, keterangan } = req.body;
-        let image = tentang_kegiatan.image; // gunakan gambar yang sudah ada
+        let image = tentang_kegiatan.image; // Keep the old image if no new image is uploaded
 
-         // Handle image update
+        // Handle image update if a new file is uploaded
         if (req.file) {
-            const imagePath = path.join(process.cwd(), 'uploads/tentang_kegiatan', tentang_kegiatan.image);
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
+            // Delete the old image from Cloudinary if it exists
+            if (tentang_kegiatan.image) {
+                const publicId = tentang_kegiatan.image.split('/').pop().split('.')[0]; // Extract public ID from the URL
+                cloudinary.v2.uploader.destroy(publicId, (err, result) => {
+                    if (err) {
+                        console.error('Error deleting image from Cloudinary:', err);
+                    } else {
+                        console.log('Old image deleted from Cloudinary:', result);
+                    }
+                });
             }
-            image = req.file.filename;
+
+            // Upload the new image to Cloudinary and get the URL
+            image = req.file.path;  // Cloudinary URL
         }
 
-        const updatedtentang_kegiatan = await prisma.tentang_kegiatan.update({
+        const updatedTentangKegiatan = await prisma.tentang_kegiatan.update({
             where: {
                 uuid: req.params.id,
             },
             data: {
-                judulKegiatan: judulKegiatan,
-                image: image,
-                tanggal: tanggal,
-                keterangan: keterangan,
+                judulKegiatan,
+                image: image, // Save the new Cloudinary image URL
+                tanggal,
+                keterangan,
                 updatedAt: new Date()
             }
         });
 
-        res.status(200).json({ msg: "Tentang Kegiatan updated successfully", tentang_kegiatan: updatedtentang_kegiatan });
+        res.status(200).json({ msg: "Tentang Kegiatan updated successfully", tentang_kegiatan: updatedTentangKegiatan });
     } catch (error) {
-        console.error("Error in updatetentang_kegiatan:", error);
+        console.error("Error in updating tentang_kegiatan:", error);
         res.status(500).json({ msg: error.message });
     }
 };
+
 
 export const deleteTentangKegiatan = async (req, res) => {
     try {

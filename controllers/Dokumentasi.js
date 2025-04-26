@@ -45,7 +45,7 @@ export const getDokumentasiById = async (req, res) => {
 export const createDokumentasi = async (req, res) => {
     try {
         const { kegiatanName } = req.body;
-        const imageKegiatan = req.file ? req.file.filename : '';
+        const imageKegiatan = req.file ? req.file.path : ''; // Cloudinary URL
 
         const newDokumentasi = await prisma.dokumentasi.create({
             data: {
@@ -77,13 +77,21 @@ export const updateDokumentasi = async (req, res) => {
         const { kegiatanName } = req.body;
         let imageKegiatan = dokumentasi.imageKegiatan; // Default to the old image
 
-        // Handle image update
+        // Handle image update with Cloudinary
         if (req.file) {
-            const oldImagePath = path.join(process.cwd(), 'uploads', 'dokumentasi', dokumentasi.imageKegiatan); // Adjust the path as needed
-            if (fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath); // Delete the old image
+            // Delete old image from Cloudinary if exists
+            if (dokumentasi.imageKegiatan) {
+                const publicId = dokumentasi.imageKegiatan.split('/').pop().split('.')[0];
+                cloudinary.v2.uploader.destroy(publicId, (err, result) => {
+                    if (err) {
+                        console.error('Error deleting image from Cloudinary:', err);
+                    } else {
+                        console.log('Old image deleted from Cloudinary:', result);
+                    }
+                });
             }
-            imageKegiatan = req.file.filename; // Use the new image filename
+
+            imageKegiatan = req.file.path; // Cloudinary URL
         }
 
         const updatedDokumentasi = await prisma.dokumentasi.update({
@@ -103,6 +111,7 @@ export const updateDokumentasi = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 };
+
 
 export const deleteDokumentasi = async (req, res) => {
     try {

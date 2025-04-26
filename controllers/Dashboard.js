@@ -63,7 +63,7 @@ export const createDashboard = async (req, res) => {
         const { lombaId, categoryId, aturanLomba } = req.body;
         let parsedCategoryId;
 
-         if (Array.isArray(categoryId)) {
+        if (Array.isArray(categoryId)) {
             parsedCategoryId = categoryId;
         } else {
             try {
@@ -74,7 +74,17 @@ export const createDashboard = async (req, res) => {
             }
         }
 
-        const imageUrl = req.file ? req.file.filename : '';
+        // Handle Cloudinary upload for image
+        let imageUrl = '';
+        if (req.file) {
+            const uploadResponse = await cloudinary.v2.uploader.upload(req.file.path, {
+                folder: 'dashboard', // Folder di Cloudinary
+                public_id: uuidv4(), // Optional: gunakan UUID untuk nama file yang unik
+                resource_type: 'image', // Tipe resource adalah gambar
+            });
+
+            imageUrl = uploadResponse.secure_url; // Mengambil URL gambar dari Cloudinary
+        }
 
         const newDashboard = await prisma.dashboard.create({
             data: {
@@ -122,13 +132,21 @@ export const updateDashboard = async (req, res) => {
 
         let imageUrl = dashboard.imageUrl; // Default to old image
 
-        // Handle image update
+        // Handle image update (upload new image to Cloudinary)
         if (req.file) {
-            const imagePath = path.join(process.cwd(), 'uploads', dashboard.imageUrl); // Adjust 'uploads' as needed
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath); // Delete old image
+            // Hapus gambar lama dari Cloudinary
+            if (dashboard.imageUrl) {
+                const publicId = dashboard.imageUrl.split('/').pop().split('.')[0]; // Extract public_id from the URL
+                await cloudinary.v2.uploader.destroy(publicId); // Menghapus gambar lama dari Cloudinary
             }
-            imageUrl = req.file.filename; // Use new image filename
+
+            // Upload gambar baru ke Cloudinary
+            const uploadResponse = await cloudinary.v2.uploader.upload(req.file.path, {
+                folder: 'dashboard',
+                public_id: uuidv4(),
+            });
+
+            imageUrl = uploadResponse.secure_url; // Mengambil URL gambar baru dari Cloudinary
         }
 
         const updatedDashboard = await prisma.dashboard.update({
@@ -150,6 +168,7 @@ export const updateDashboard = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 };
+
 
 export const deleteDashboard = async (req, res) => {
     try {
