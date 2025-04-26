@@ -7,7 +7,7 @@ import {
     deleteDashboard
 } from "../controllers/Dashboard.js";
 import { verifyUser } from "../middleware/AuthUser.js";
-import uploadDashboard from "../multerCloudinary.js";
+import { uploadDashboard } from "../multerCloudinary.js";
 
 const router = express.Router();
 

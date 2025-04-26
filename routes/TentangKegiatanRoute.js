@@ -7,7 +7,7 @@ import {
     deleteTentangKegiatan
 } from "../controllers/TentangKegiatan.js";
 import { verifyUser } from "../middleware/AuthUser.js";
-import uploadTentangKegiatan from "../multerCloudinary.js";
+import { uploadTentangKegiatan } from "../multerCloudinary.js";
 
 
 const router = express.Router();

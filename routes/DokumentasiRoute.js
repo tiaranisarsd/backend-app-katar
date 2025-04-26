@@ -7,7 +7,7 @@ import {
     deleteDokumentasi,
 } from "../controllers/Dokumentasi.js";
 import { verifyUser} from "../middleware/AuthUser.js";
-import uploadDokumentasi from "../multerCloudinary.js";
+import { uploadDokumentasi } from "../multerCloudinary.js";
 
 
 const router = express.Router();

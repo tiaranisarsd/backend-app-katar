@@ -7,7 +7,7 @@ import {
     deleteBanner,
 } from "../controllers/Banner.js";
 import { verifyUser} from "../middleware/AuthUser.js";
-import uploadBanner from "../multerCloudinary.js";
+import { uploadBanner } from "../multerCloudinary.js";
 
 const router = express.Router();
 
