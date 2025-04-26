@@ -11,7 +11,7 @@ export const getPendaftaran = async (req, res) => {
                     uuid: true,
                     name: true,
                     rw: true,
-                    user: {
+                    users: {
                         select: {
                             name: true,
                             email: true
@@ -41,7 +41,7 @@ export const getPendaftaran = async (req, res) => {
                     uuid: true,
                     name: true,
                     rw: true,
-                    user: {
+                    users: {
                         select: {
                             name: true,
                             email: true
@@ -79,7 +79,7 @@ export const getPendaftaranById = async (req, res) => {
                 uuid: true,
                 name: true,
                 rw: true,
-                 user: {
+                 users: {
                     select: {
                         name: true,
                         email: true
