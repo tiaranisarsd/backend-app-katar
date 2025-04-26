@@ -37,7 +37,7 @@ export const createCategory = async (req, res) => {
         const newCategory = await prisma.category.create({
             data: {
                 categoryName,
-                lombaId,
+                lombaId: parseInt(lombaId),
                 uuid: crypto.randomUUID(),
                 createdAt: new Date(),
                 updatedAt: new Date()
