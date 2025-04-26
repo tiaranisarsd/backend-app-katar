@@ -61,30 +61,7 @@ export const getDashboardById = async (req, res) => {
 export const createDashboard = async (req, res) => {
     try {
         const { lombaId, categoryId, aturanLomba } = req.body;
-        let parsedCategoryId;
-
-        if (Array.isArray(categoryId)) {
-            parsedCategoryId = categoryId;
-        } else {
-            try {
-                parsedCategoryId = JSON.parse(categoryId);
-            } catch (error) {
-                console.error("Error parsing categoryId in createDashboard:", error);
-                return res.status(400).json({ msg: "Invalid categoryId format" });
-            }
-        }
-
-        // Handle Cloudinary upload for image
-        let imageUrl = '';
-        if (req.file) {
-            const uploadResponse = await cloudinary.v2.uploader.upload(req.file.path, {
-                folder: 'dashboard', // Folder di Cloudinary
-                public_id: uuidv4(), // Optional: gunakan UUID untuk nama file yang unik
-                resource_type: 'image', // Tipe resource adalah gambar
-            });
-
-            imageUrl = uploadResponse.secure_url; // Mengambil URL gambar dari Cloudinary
-        }
+        const imageUrl = req.file ? req.file.path : ''; // Cloudinary URL
 
         const newDashboard = await prisma.dashboard.create({
             data: {
@@ -100,7 +77,7 @@ export const createDashboard = async (req, res) => {
 
         res.status(201).json({ msg: "Dashboard Created Successfully", dashboard: newDashboard });
     } catch (error) {
-        console.error("Error in createDashboard:", error);
+        console.error("Error creating dashboard:", error);
         res.status(500).json({ msg: error.message });
     }
 };
@@ -109,62 +86,50 @@ export const updateDashboard = async (req, res) => {
     try {
         const dashboard = await prisma.dashboard.findUnique({
             where: {
-                uuid: req.params.id
-            }
+                uuid: req.params.id,
+            },
         });
 
-        if (!dashboard) {
-            return res.status(404).json({ msg: "Data tidak ditemukan" });
-        }
+        if (!dashboard) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
-        const { lombaId, aturanLomba } = req.body;
-        let { categoryId } = req.body;
+        const { lombaId, categoryId, aturanLomba } = req.body;
+        let imageUrl = dashboard.imageUrl; // Default to the old image
 
-        // Handle multiple categoryIds
-        if (!Array.isArray(categoryId)) {
-            try {
-                categoryId = JSON.parse(categoryId);
-            } catch (error) {
-                console.error("Error parsing categoryId:", error);
-                return res.status(400).json({ msg: "Invalid categoryId format" });
-            }
-        }
-
-        let imageUrl = dashboard.imageUrl; // Default to old image
-
-        // Handle image update (upload new image to Cloudinary)
+        // Handle image update with Cloudinary
         if (req.file) {
-            // Hapus gambar lama dari Cloudinary
+            // Delete old image from Cloudinary if exists
             if (dashboard.imageUrl) {
-                const publicId = dashboard.imageUrl.split('/').pop().split('.')[0]; // Extract public_id from the URL
-                await cloudinary.v2.uploader.destroy(publicId); // Menghapus gambar lama dari Cloudinary
+                const publicId = dashboard.imageUrl.split('/').pop().split('.')[0];
+                cloudinary.v2.uploader.destroy(publicId, (err, result) => {
+                    if (err) {
+                        console.error('Error deleting image from Cloudinary:', err);
+                    } else {
+                        console.log('Old image deleted from Cloudinary:', result);
+                    }
+                });
             }
 
-            // Upload gambar baru ke Cloudinary
-            const uploadResponse = await cloudinary.v2.uploader.upload(req.file.path, {
-                folder: 'dashboard',
-                public_id: uuidv4(),
-            });
-
-            imageUrl = uploadResponse.secure_url; // Mengambil URL gambar baru dari Cloudinary
+            imageUrl = req.file.path; // Cloudinary URL
         }
 
         const updatedDashboard = await prisma.dashboard.update({
             where: {
-                uuid: req.params.id
+                uuid: req.params.id,
             },
             data: {
+                uuid: uuidv4(),
                 lombaId: parseInt(lombaId),
                 imageUrl: imageUrl,
                 categoryId: parseInt(categoryId),
                 aturanLomba: aturanLomba,
+                createdAt: new Date(),
                 updatedAt: new Date()
-            }
+            },
         });
 
         res.status(200).json({ msg: "Data Dashboard berhasil diperbarui", dashboard: updatedDashboard });
     } catch (error) {
-        console.error("Error in updateDashboard:", error);
+        console.error("Error updating dashboard:", error);
         res.status(500).json({ msg: error.message });
     }
 };
