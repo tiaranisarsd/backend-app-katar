@@ -52,7 +52,7 @@ Content-Type: application/json
 
 ###
 // Login sebagai Users
-POST https://backend-app-katar.vercel.app/login
+POST http://localhost:5001/login
 Content-Type: application/json
 
 {
@@ -65,22 +65,22 @@ GET http://localhost:5001/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
 
 ###
-DELETE https://backend-app-katar.vercel.app/logout
+DELETE http://localhost:5001/logout
 
 
 ###
 // Get All Pendaftaran
-GET https://backend-app-katar.vercel.app/pendaftaran
+GET http://localhost:5001/pendaftaran
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM3MDA3LCJleHAiOjE3NDU3NDA2MDd9.lswKQ7NzZ3Iqs0ZG_ZJI6mQ5PZcTrPPD0MyPL6Jj0n4
 
 ###
 // Get Single Pendaftaran
-GET https://backend-app-katar.vercel.app/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
+GET http://localhost:5001/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzMyMTU2LCJleHAiOjE3NDU3MzU3NTZ9.qfNRh__PE61ZPM73XPvnzsv5nLJCoOl-6toGVxUevqI
 
 ###
 // POST Data Pendaftaran
-POST https://backend-app-katar.vercel.app/pendaftaran
+POST http://localhost:5001/pendaftaran
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM3MDA3LCJleHAiOjE3NDU3NDA2MDd9.lswKQ7NzZ3Iqs0ZG_ZJI6mQ5PZcTrPPD0MyPL6Jj0n4
 
@@ -93,7 +93,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 // UPDATE Data Pendaftaran
-PATCH https://backend-app-katar.vercel.app/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
+PATCH http://localhost:5001/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzMyMTU2LCJleHAiOjE3NDU3MzU3NTZ9.qfNRh__PE61ZPM73XPvnzsv5nLJCoOl-6toGVxUevqI
 
@@ -106,36 +106,36 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 // Delete Data Pendaftaran
-DELETE https://backend-app-katar.vercel.app/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
+DELETE http://localhost:5001/pendaftaran/2caf3000-8b13-4b6f-be34-a28a3ebcc181
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzMyMTU2LCJleHAiOjE3NDU3MzU3NTZ9.qfNRh__PE61ZPM73XPvnzsv5nLJCoOl-6toGVxUevqI
 
 
 ###
 // Get All Lomba
 GET http://localhost:5001/lomba
-Authorization: Bearer eyJhbGciOiJIU1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 ###
 // Get All Category
 GET http://localhost:5001/category
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 ###
 // POST Data Lomba
 POST http://localhost:5001/lomba
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 {
     
-    "lombaName": "Futsal"
+    "lombaName": "Badminton"
 }
 
 ###
 // POST Data Category
 POST http://localhost:5001/category
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM5OTMzLCJleHAiOjE3NDU3NDM1MzN9.3U9I_biKm71GWTVDLFieoGncgevAa0TIqHa4zipkCV4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 {
     
@@ -145,7 +145,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 //Update Lomba
-PATCH https://backend-app-katar.vercel.app/lomba/fe0beebe-95f9-4a9c-a4cc-dd50c95ec5d9
+PATCH http://localhost:5001/lomba/fe0beebe-95f9-4a9c-a4cc-dd50c95ec5d9
 Content-Type: application/json
 
 {
@@ -154,17 +154,17 @@ Content-Type: application/json
 
 ###
 //Update Category
-PATCH http://localhost:5001/category/77bbe621-2489-4c28-a195-df66d3d6ad73
+PATCH http://localhost:5001/category/31c1ae12-1e2c-4176-a63d-9f6d4d53428f
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 {
-"categoryName": "Ganda Putra"
+"categoryName": "Single Putra"
 }
 
 ###
 //Delete Lomba
-DELETE https://backend-app-katar.vercel.app/lomba/4e535098-77d0-4dbb-a323-884aca705c97
+DELETE http://localhost:5001/lomba/4e535098-77d0-4dbb-a323-884aca705c97
 
 ###
 //Delete Category
@@ -173,48 +173,49 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 //Category By Lomba
-GET https://backend-app-katar.vercel.app/category/lomba/1
+GET http://localhost:5001/category/lomba/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 ###
 // Get All Dashboard
 GET http://localhost:5001/Dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzYyMDI2LCJleHAiOjE3NDU3NjU2MjZ9.78R3OPKIN4g8yzTD_6q-8ZENxNNHAuJ-rfstxZitXxA
 
 ###
 // Get Single Dashboard
-GET https://backend-app-katar.vercel.app/dashboard/112973ca-e0e2-4d00-b14c-acc63256cc8f
+GET http://localhost:5001/dashboard/112973ca-e0e2-4d00-b14c-acc63256cc8f
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM1ODY1LCJleHAiOjE3NDU3Mzk0NjV9.NOCFiMg6B290z5L-1dEHHMSsJhv8iOhoEHwPjeb2LnY
 
 ###
 // POST Data Dashboard
 POST http://localhost:5001/Dashboard
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzYyMDI2LCJleHAiOjE3NDU3NjU2MjZ9.78R3OPKIN4g8yzTD_6q-8ZENxNNHAuJ-rfstxZitXxA
 
 {
-    "lombaId": 1,
+    "lombaId": "1",
     "imageUrl": "1720496226573-437123357.jpg",
-    "categoryId": 1,
+    "categoryId": "1",
     "aturanLomba": "<p>tesst </p>"
 }
 
 ###
 //Update Data Dashboard
-PATCH http://localhost:5001/Dashboard/6103cd16-66d4-4956-b202-1c21ab0a9dd6
+PATCH http://localhost:5001/Dashboard/ae1ce55d-8065-489e-8b96-c54e61f7974d
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQzMzgxLCJleHAiOjE3NDU3NDY5ODF9.yDRCIg0IhOvCMbJ98jGQ6_PBS3NrXY9rrJLGpnl2huw
 
 {
 
     "lombaId": 1,
     "imageUrl": "1720883725343-69949999.jpg",
     "categoryId": 1,
-    "aturanLomba": "tesst updated "
+    "aturanLomba": "tesst updated 2"
 }
 
 ###
 //Delete Data Dashboard
-DELETE https://backend-app-katar.vercel.app/Dashboard/e488f864-13f6-4d31-aed8-5a5a595954e2
+DELETE http://localhost:5001/Dashboard/e488f864-13f6-4d31-aed8-5a5a595954e2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
 
 ###
@@ -224,7 +225,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 // Get Single banner
-GET https://backend-app-katar.vercel.app/banner/a94420e0-9e7d-4ea9-afe3-605b60cc88aa
+GET http://localhost:5001/banner/a94420e0-9e7d-4ea9-afe3-605b60cc88aa
 
 
 ###
@@ -258,17 +259,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 
 ###
 // Get All Dokumentasi
-GET https://backend-app-katar.vercel.app/Dokumentasi
+GET http://localhost:5001/Dokumentasi
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjgwNDkwLCJleHAiOjE3NDU2ODQwOTB9.J_zA63gzriAvrRFZ3Lh0vC_trGC6WADNrscwf3O9zcQ
 
 ###
 // Get Single Dokumentasi
-GET https://backend-app-katar.vercel.app/Dokumentasi/92223f36-7b5b-4500-ae84-2324025f8eee
+GET http://localhost:5001/Dokumentasi/92223f36-7b5b-4500-ae84-2324025f8eee
 
 
 ###
 // POST Data Dokumentasi
-POST https://backend-app-katar.vercel.app/Dokumentasi
+POST http://localhost:5001/Dokumentasi
 Content-Type: application/json
 
 {
@@ -279,21 +280,21 @@ Content-Type: application/json
 
 ###
 //Delete Data Dokuemntasi
-DELETE https://backend-app-katar.vercel.app/Dokumentasi/f03e3889-8615-409c-a641-c64c5829028e
+DELETE http://localhost:5001/Dokumentasi/f03e3889-8615-409c-a641-c64c5829028e
 
 ###
 // Get All Tentang Kegiatan
-GET https://backend-app-katar.vercel.app/TentangKegiatan
+GET http://localhost:5001/TentangKegiatan
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NjgwNDkwLCJleHAiOjE3NDU2ODQwOTB9.J_zA63gzriAvrRFZ3Lh0vC_trGC6WADNrscwf3O9zcQ
 
 ###
 // Get Single TentangKegiatan
-GET https://backend-app-katar.vercel.app/TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17
+GET http://localhost:5001/TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17
 
 
 ###
 // POST Data TentangKegiatan
-POST https://backend-app-katar.vercel.app/TentangKegiatan
+POST http://localhost:5001/TentangKegiatan
 Content-Type: application/json
 
 {
@@ -306,4 +307,4 @@ Content-Type: application/json
 
 ###
 //Delete Data TentangKegiatan
-DELETE https://backend-app-katar.vercel.app/TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17
+DELETE http://localhost:5001/TentangKegiatan/114f1f91-fd8b-4490-9752-cfdc1abbda17

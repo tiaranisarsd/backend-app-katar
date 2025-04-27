@@ -127,21 +127,23 @@ export const updateDashboard = async (req, res) => {
         if (!dashboard) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
         const { lombaId, categoryId, aturanLomba } = req.body;
-        let imageUrl = dashboard.imageUrl; 
+        let imageUrl = dashboard.imageUrl;
+
+        const parsedLombaId = lombaId ? parseInt(lombaId, 10) : null;
+        const parsedCategoryId = categoryId ? parseInt(categoryId, 10) : null;
 
         if (req.file) {
             if (dashboard.imageUrl) {
-                const publicId = dashboard.imageUrl.split('/').pop().split('.')[0];
-                cloudinary.v2.uploader.destroy(publicId, (err, result) => {
-                    if (err) {
-                        console.error('Error deleting image from Cloudinary:', err);
-                    } else {
-                        console.log('Old image deleted from Cloudinary:', result);
-                    }
-                });
+                try {
+                    const publicId = dashboard.imageUrl.split('/').pop().split('.')[0];
+                    const result = await cloudinary.v2.uploader.destroy(publicId);
+                    console.log('Old image deleted from Cloudinary:', result);
+                } catch (err) {
+                    console.error('Error deleting image from Cloudinary:', err);
+                }
             }
 
-            imageUrl = req.file.path; 
+            imageUrl = req.file.path;
         }
 
         const updatedDashboard = await prisma.dashboard.update({
@@ -149,12 +151,11 @@ export const updateDashboard = async (req, res) => {
                 id: dashboard.id
             },
             data: {
-                uuid: uuidv4(),
-                lombaId: lombaId,
+                // uuid: uuidv4(),  // Sebaiknya jangan di-update jika ini identifier tetap
+                lombaId: parsedLombaId,
                 imageUrl: imageUrl,
-                categoryId: categoryId,
+                categoryId: parsedCategoryId,
                 aturanLomba: aturanLomba,
-                createdAt: new Date(),
                 updatedAt: new Date()
             },
         });
