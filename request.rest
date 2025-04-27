@@ -56,22 +56,23 @@ POST http://localhost:5001/login
 Content-Type: application/json
 
 {
-    "email": "admin@gmail.com",
-    "password": "admin"
+    "email": "users@gmail.com",
+    "password": "users"
 }
 
 ###
 GET http://localhost:5001/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzQyNDk1LCJleHAiOjE3NDU3NDYwOTV9.p7jxX7-ceyxVuT_w-f2Fi9bS-IfGji4vFHXDtCHfVoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzY2NDk1LCJleHAiOjE3NDU3NzAwOTV9.caw66f5KuxMJ20f9a7KK-NT19VbkAzl5-E0biU9po74
 
 ###
 DELETE http://localhost:5001/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzY2MTE4LCJleHAiOjE3NDU3Njk3MTh9.-l0nYK0Bnmhunpg8-1N0A2Z3KCYyeDwY7DPE_7TCu5s
 
 
 ###
 // Get All Pendaftaran
 GET http://localhost:5001/pendaftaran
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM3MDA3LCJleHAiOjE3NDU3NDA2MDd9.lswKQ7NzZ3Iqs0ZG_ZJI6mQ5PZcTrPPD0MyPL6Jj0n4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzY2NDk1LCJleHAiOjE3NDU3NzAwOTV9.caw66f5KuxMJ20f9a7KK-NT19VbkAzl5-E0biU9po74
 
 ###
 // Get Single Pendaftaran
@@ -82,10 +83,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6I
 // POST Data Pendaftaran
 POST http://localhost:5001/pendaftaran
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1NzM3MDA3LCJleHAiOjE3NDU3NDA2MDd9.lswKQ7NzZ3Iqs0ZG_ZJI6mQ5PZcTrPPD0MyPL6Jj0n4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXJzIiwiaWF0IjoxNzQ1NzY1Nzg2LCJleHAiOjE3NDU3NjkzODZ9.dXyz-Cj-Wl630CTq4DP-6G_9jWNhM-1btKL-fjY_PAo
 
 {
-    "name": "test",
+    "name": "INI USERS",
     "rw": 8,
     "lombaId": 1,
     "categoryId": 1

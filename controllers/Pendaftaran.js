@@ -13,14 +13,14 @@ export const getPendaftaran = async (req, res) => {
                     uuid: true,
                     name: true,
                     rw: true,
-                    user: { select: { name: true, email: true } },
+                    user: { select: { name: true, email: true, role: true } },
                     lomba: { select: { id: true, lombaName: true } },
                     category: { select: { id: true, categoryName: true } }
                 }
             });
         } else {
             response = await prisma.pendaftaran.findMany({
-                where: { userId: req.user.id }, // Assuming you have user info in req.user
+                where: { userId: req.user.id }, 
                 select: {
                     id: true,
                     uuid: true,
@@ -37,6 +37,7 @@ export const getPendaftaran = async (req, res) => {
         res.status(500).json({ msg: error?.message || "Internal server error" });
     }
 };
+
 
 
 export const getPendaftaranById = async (req, res) => {
