@@ -10,10 +10,10 @@ import { verifyUser } from "../middleware/AuthUser.js";
 
 const router = express.Router();
 
-router.get('/Pendaftaran', verifyUser, getPendaftaran);
-router.get('/Pendaftaran/:id', verifyUser, getPendaftaranById);
-router.post('/Pendaftaran', verifyUser, createPendaftaran);
-router.patch('/Pendaftaran/:id', verifyUser, updatePendaftaran);
-router.delete('/Pendaftaran/:id', verifyUser, deletePendaftaran);
+router.get('/pendaftaran', verifyUser, getPendaftaran);
+router.get('/pendaftaran/:id', verifyUser, getPendaftaranById);
+router.post('/pendaftaran', verifyUser, createPendaftaran);
+router.patch('/pendaftaran/:id', verifyUser, updatePendaftaran);
+router.delete('/pendaftaran/:id', verifyUser, deletePendaftaran);
 
 export default router;

@@ -31,7 +31,7 @@ export const getDashboard = async (req, res) => {
 
 export const getDashboardById = async (req, res) => {
     try {
-        const dashboard = await prisma.dashboard.findUnique({
+        const dashboard = await prisma.dashboard.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -70,13 +70,17 @@ export const createDashboard = async (req, res) => {
         const newDashboard = await prisma.dashboard.create({
             data: {
                 uuid: uuidv4(),
-                lombaId: parseInt(lombaId),
-                categoryId: parseInt(categoryId),
+                lomba: {
+                    connect: {
+                        id: lombaId,
+                    },
+                },
+                categoryId: categoryId,
                 imageUrl: imageUrl,
                 aturanLomba: aturanLomba,
                 createdAt: new Date(),
-                updatedAt: new Date()
-            }
+                updatedAt: new Date(),
+            },
         });
 
         res.status(201).json({ msg: "Dashboard Created Successfully", dashboard: newDashboard });
@@ -87,9 +91,10 @@ export const createDashboard = async (req, res) => {
 };
 
 
+
 export const updateDashboard = async (req, res) => {
     try {
-        const dashboard = await prisma.dashboard.findUnique({
+        const dashboard = await prisma.dashboard.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -98,11 +103,9 @@ export const updateDashboard = async (req, res) => {
         if (!dashboard) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
         const { lombaId, categoryId, aturanLomba } = req.body;
-        let imageUrl = dashboard.imageUrl; // Default to the old image
+        let imageUrl = dashboard.imageUrl; 
 
-        // Handle image update with Cloudinary
         if (req.file) {
-            // Delete old image from Cloudinary if exists
             if (dashboard.imageUrl) {
                 const publicId = dashboard.imageUrl.split('/').pop().split('.')[0];
                 cloudinary.v2.uploader.destroy(publicId, (err, result) => {
@@ -114,18 +117,18 @@ export const updateDashboard = async (req, res) => {
                 });
             }
 
-            imageUrl = req.file.path; // Cloudinary URL
+            imageUrl = req.file.path; 
         }
 
         const updatedDashboard = await prisma.dashboard.update({
             where: {
-                uuid: req.params.id,
+                id: dashboard.id
             },
             data: {
                 uuid: uuidv4(),
-                lombaId: parseInt(lombaId),
+                lombaId: lombaId,
                 imageUrl: imageUrl,
-                categoryId: parseInt(categoryId),
+                categoryId: categoryId,
                 aturanLomba: aturanLomba,
                 createdAt: new Date(),
                 updatedAt: new Date()
@@ -142,7 +145,7 @@ export const updateDashboard = async (req, res) => {
 
 export const deleteDashboard = async (req, res) => {
     try {
-        const dashboard = await prisma.dashboard.findUnique({
+        const dashboard = await prisma.dashboard.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -153,7 +156,6 @@ export const deleteDashboard = async (req, res) => {
             return res.status(404).json({ msg: "Data tidak ditemukan" });
         }
 
-        // Delete associated image file
         if (dashboard.imageUrl) {
             const imagePath = path.join(process.cwd(), 'uploads', dashboard.imageUrl); // Adjust 'uploads' path if necessary
             if (fs.existsSync(imagePath)) {
@@ -169,7 +171,7 @@ export const deleteDashboard = async (req, res) => {
 
         await prisma.dashboard.delete({
             where: {
-                uuid: req.params.id,
+                id: dashboard.id,
             }
         });
 

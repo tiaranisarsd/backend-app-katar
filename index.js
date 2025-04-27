@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import session from "express-session";
 import dotenv from "dotenv";
 import UserRoute from "./routes/UserRoute.js";
 import PendaftaranRoute from "./routes/PendaftaranRoute.js";
