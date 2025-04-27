@@ -37,13 +37,13 @@ model category {
 model dashboard {
     id          Int       @id @default(autoincrement())
     uuid        String    @db.VarChar(255)
-    lombaId     Int
+    lombaId     Int?
     imageUrl    String?   @db.VarChar(255)
-    categoryId  Int   
+    categoryId  Int?   
     aturanLomba String    @db.Text
     createdAt DateTime @default(now()) 
     updatedAt DateTime @updatedAt 
-    lomba       lomba     @relation(fields: [lombaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    lomba       lomba?     @relation(fields: [lombaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     category     category?  @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 

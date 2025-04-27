@@ -73,6 +73,16 @@ export const createDashboard = async (req, res) => {
         const { lombaId, categoryId, aturanLomba } = req.body;
         const imageUrl = req.file ? req.file.path : ''; // Cloudinary URL
 
+        const parsedLombaId = parseInt(lombaId);
+        const parsedCategoryId = parseInt(categoryId);
+    
+        // Ensure the ids are valid integers
+        if (isNaN(parsedLombaId) || isNaN(parsedCategoryId)) {
+            setMsg("ID lomba atau kategori tidak valid.");
+            return;
+        }
+    
+        
         if (!lombaId || !categoryId || !aturanLomba) {
             return res.status(400).json({ msg: "Semua field wajib diisi" });
         }
@@ -82,12 +92,12 @@ export const createDashboard = async (req, res) => {
                 uuid: uuidv4(),
                 lomba: {
                     connect: {
-                        id: lombaId,
+                        id: parsedLombaId,
                     },
                 },
                 category: {
                     connect: {
-                        id: categoryId,
+                        id: parsedCategoryId,
                     },
                 },
                 imageUrl: imageUrl,
