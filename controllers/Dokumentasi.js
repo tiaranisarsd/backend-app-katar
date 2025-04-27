@@ -23,7 +23,7 @@ export const getDokumentasi = async (req, res) => {
 
 export const getDokumentasiById = async (req, res) => {
     try {
-        const dokumentasi = await prisma.dokumentasi.findUnique({
+        const dokumentasi = await prisma.dokumentasi.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -66,7 +66,7 @@ export const createDokumentasi = async (req, res) => {
 
 export const updateDokumentasi = async (req, res) => {
     try {
-        const dokumentasi = await prisma.dokumentasi.findUnique({
+        const dokumentasi = await prisma.dokumentasi.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -96,7 +96,7 @@ export const updateDokumentasi = async (req, res) => {
 
         const updatedDokumentasi = await prisma.dokumentasi.update({
             where: {
-                uuid: req.params.id,
+                id: dokumentasi.id,
             },
             data: {
                 kegiatanName,
@@ -115,7 +115,7 @@ export const updateDokumentasi = async (req, res) => {
 
 export const deleteDokumentasi = async (req, res) => {
     try {
-        const dokumentasi = await prisma.dokumentasi.findUnique({
+        const dokumentasi = await prisma.dokumentasi.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -142,7 +142,7 @@ export const deleteDokumentasi = async (req, res) => {
 
         await prisma.dokumentasi.delete({
             where: {
-                uuid: req.params.id,
+                id: dokumentasi.id,
             },
         });
 

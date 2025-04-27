@@ -20,7 +20,7 @@ export const getAllLomba = async (req, res) => {
 // Mendapatkan Lomba berdasarkan ID
 export const getLombaById = async (req, res) => {
     try {
-        const lomba = await prisma.lomba.findUnique({
+        const lomba = await prisma.lomba.findFirst({
             where: {
                 uuid: req.params.id
             },
@@ -59,7 +59,7 @@ export const createLomba = async (req, res) => {
 // Memperbarui Lomba berdasarkan ID
 export const updateLomba = async (req, res) => {
     try {
-        const lomba = await prisma.lomba.findUnique({
+        const lomba = await prisma.lomba.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -69,7 +69,7 @@ export const updateLomba = async (req, res) => {
         const { lombaName } = req.body;
         const updatedLomba = await prisma.lomba.update({
             where: {
-                uuid: req.params.id
+                id: lomba.id
             },
             data: {
                 lombaName: lombaName,
@@ -85,7 +85,7 @@ export const updateLomba = async (req, res) => {
 // Menghapus Lomba berdasarkan ID
 export const deleteLomba = async (req, res) => {
     try {
-        const lomba = await prisma.lomba.findUnique({
+        const lomba = await prisma.lomba.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -94,7 +94,7 @@ export const deleteLomba = async (req, res) => {
 
         await prisma.lomba.delete({
             where: {
-                uuid: req.params.id
+                id: lomba.id
             }
         });
         res.status(200).json({ msg: "Lomba deleted successfully" });

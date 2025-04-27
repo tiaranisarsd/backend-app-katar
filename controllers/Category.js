@@ -19,7 +19,7 @@ export const getCategory = async (req, res) => {
 
 export const getCategoryById = async (req, res) => {
     try {
-        const category = await prisma.category.findUnique({
+        const category = await prisma.category.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -51,7 +51,7 @@ export const createCategory = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
     try {
-        const category = await prisma.category.findUnique({
+        const category = await prisma.category.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -61,7 +61,7 @@ export const updateCategory = async (req, res) => {
         const { categoryName } = req.body;
         const updatedCategory = await prisma.category.update({
             where: {
-                uuid: req.params.id,
+                id: category.id,
             },
             data: { 
                 categoryName,
@@ -76,7 +76,7 @@ export const updateCategory = async (req, res) => {
 
 export const deleteCategory = async (req, res) => {
     try {
-        const category = await prisma.category.findUnique({
+        const category = await prisma.category.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -84,7 +84,7 @@ export const deleteCategory = async (req, res) => {
         if (!category) return res.status(404).json({ msg: "Data tidak ditemukan" });
         await prisma.category.delete({
             where: {
-                uuid: req.params.id
+                id: category.id
             }
         });
         res.status(200).json({ msg: "Category deleted successfully" });

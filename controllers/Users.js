@@ -15,9 +15,9 @@ export const getUsers = async (req, res) => {
 
 export const getUsersById = async (req, res) => {
   try {
-    const response = await prisma.users.findUnique({
+    const response = await prisma.users.findFirst({
       where: {
-        id: Number(req.params.id),
+        uuid: req.params.id,
       },
     });
     if (!response) return res.status(404).json({ msg: "Data tidak ditemukan" });
@@ -52,16 +52,16 @@ export const createUsers = async (req, res) => {
 };
 
 export const updateUsers = async (req, res) => {
-  const response = await prisma.users.findUnique({
+  const users = await prisma.users.findFirst({
     where: {
-      id: Number(req.params.id),
+      uuid: req.params.id,
     },
   });
 
-  if (!response) return res.status(404).json({ msg: "User not found" });
+  if (!users) return res.status(404).json({ msg: "User not found" });
 
   const { name, email, password, confPassword, role } = req.body;
-  let hashPassword = response.password;
+  let hashPassword = users.password;
 
   if (password && password !== confPassword) {
     return res
@@ -76,7 +76,7 @@ export const updateUsers = async (req, res) => {
   try {
     await prisma.users.update({
       where: {
-        id: Number(req.params.id),
+        id: users.id,
       },
       data: {
         uuid: uuidv4(),
@@ -94,16 +94,16 @@ export const updateUsers = async (req, res) => {
 };
 
 export const deleteUsers = async (req, res) => {
-  const response = await prisma.users.findUnique({
+  const users = await prisma.users.findFirst({
     where: {
-      id: Number(req.params.id),
+      uuid: req.params.id,
     },
   });
-  if (!response) return res.status(404).json({ msg: "User not found" });
+  if (!users) return res.status(404).json({ msg: "User not found" });
   try {
     await prisma.users.delete({
       where: {
-        id: Number(req.params.id),
+        id: users.id,
       },
     });
     res.status(201).json({ msg: "Users deleted successfully" });

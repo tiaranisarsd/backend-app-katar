@@ -13,11 +13,16 @@ export const getDashboard = async (req, res) => {
                 uuid: true,
                 imageUrl: true,
                 aturanLomba: true,
-                categoryId: true,
                 lomba: {
                     select: {
                         id: true,
                         lombaName: true
+                    }
+                },
+                category: {
+                    select: {
+                        id: true,
+                        categoryName: true
                     }
                 }
             }
@@ -40,11 +45,16 @@ export const getDashboardById = async (req, res) => {
                 uuid: true,
                 imageUrl: true,
                 aturanLomba: true,
-                categoryId: true,
                 lomba: {
                     select: {
                         id: true,
                         lombaName: true
+                    }
+                },
+                category: {
+                    select: {
+                        id: true,
+                        categoryName: true
                     }
                 }
             }
@@ -75,7 +85,11 @@ export const createDashboard = async (req, res) => {
                         id: lombaId,
                     },
                 },
-                categoryId: categoryId,
+                category: {
+                    connect: {
+                        id: categoryId,
+                    },
+                },
                 imageUrl: imageUrl,
                 aturanLomba: aturanLomba,
                 createdAt: new Date(),

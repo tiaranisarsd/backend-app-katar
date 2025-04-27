@@ -23,7 +23,7 @@ export const getTentangKegiatan = async (req, res) => {
 
 export const getTentangKegiatanById = async (req, res) => {
     try {
-        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -73,7 +73,7 @@ export const createTentangKegiatan = async (req, res) => {
 };
 export const updateTentangKegiatan = async (req, res) => {
     try {
-        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -104,7 +104,7 @@ export const updateTentangKegiatan = async (req, res) => {
 
         const updatedTentangKegiatan = await prisma.tentang_kegiatan.update({
             where: {
-                uuid: req.params.id,
+                id: tentang_kegiatan.id,
             },
             data: {
                 judulKegiatan,
@@ -125,7 +125,7 @@ export const updateTentangKegiatan = async (req, res) => {
 
 export const deleteTentangKegiatan = async (req, res) => {
     try {
-        const tentang_kegiatan = await prisma.tentang_kegiatan.findUnique({
+        const tentang_kegiatan = await prisma.tentang_kegiatan.findFirst({
             where: {
                 uuid: req.params.id
             }
@@ -144,7 +144,7 @@ export const deleteTentangKegiatan = async (req, res) => {
 
         await prisma.tentang_kegiatan.delete({
             where: {
-                uuid: req.params.id,
+                id: tentang_kegiatan.id,
             }
         });
 

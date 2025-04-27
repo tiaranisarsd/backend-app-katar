@@ -70,7 +70,7 @@ export const Me = async (req, res) => {
     if (!tokenData) {
       return res.status(401).json({ msg: "Invalid or Expired Token" });
     }
-    const response = await prisma.users.findUnique({
+    const response = await prisma.users.findFirst({
       where: {
         id: Number(userId),
       },

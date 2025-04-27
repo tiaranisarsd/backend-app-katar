@@ -32,7 +32,7 @@ export const getAllBanner = async (req, res) => {
 
 export const getBannerById = async (req, res) => {
     try {
-        const banner = await prisma.banner.findUnique({
+        const banner = await prisma.banner.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -70,7 +70,7 @@ export const createBanner = async (req, res) => {
 
 export const updateBanner = async (req, res) => {
     try {
-        const banner = await prisma.banner.findUnique({
+        const banner = await prisma.banner.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -90,7 +90,7 @@ export const updateBanner = async (req, res) => {
 
         const updatedBanner = await prisma.banner.update({
             where: {
-                uuid: req.params.id,
+                id: banner.id,
             },
             data: {
                 bannerName,
@@ -109,7 +109,7 @@ export const updateBanner = async (req, res) => {
 
 export const deleteBanner = async (req, res) => {
     try {
-        const banner = await prisma.banner.findUnique({
+        const banner = await prisma.banner.findFirst({
             where: {
                 uuid: req.params.id,
             },
@@ -129,7 +129,7 @@ export const deleteBanner = async (req, res) => {
 
         await prisma.banner.delete({
             where: {
-                uuid: req.params.id,
+                id: banner.id,
             },
         });
 
