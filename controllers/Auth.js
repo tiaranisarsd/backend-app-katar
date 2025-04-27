@@ -54,15 +54,17 @@ export const Login = async (req, res) => {
 
 export const Me = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.id; // Mengakses userId dari req.user
 
+    // Verifikasi token yang valid di database
+    const token = req.headers.authorization.split(" ")[1];
     const tokenData = await prisma.token.findFirst({
       where: {
-        token: req.headers.authorization.split(" ")[1],
-        userId: Number(userId),
+        token: token,
+        userId: userId,
         revoked: false,
         expiresAt: {
-          gt: new Date(), 
+          gt: new Date(),  // Pastikan token belum kadaluarsa
         },
       },
     });
@@ -70,9 +72,11 @@ export const Me = async (req, res) => {
     if (!tokenData) {
       return res.status(401).json({ msg: "Invalid or Expired Token" });
     }
-    const response = await prisma.users.findFirst({
+
+    // Ambil data user
+    const response = await prisma.users.findUnique({
       where: {
-        id: Number(userId),
+        id: userId, // Menyesuaikan pencarian berdasarkan userId yang valid
       },
       select: {
         id: true,
@@ -82,7 +86,9 @@ export const Me = async (req, res) => {
       },
     });
 
-    if (!response) return res.status(404).json({ msg: "User not found" });
+    if (!response) {
+      return res.status(404).json({ msg: "User not found" });
+    }
 
     res.status(200).json(response);
   } catch (error) {
@@ -90,6 +96,7 @@ export const Me = async (req, res) => {
     res.status(500).json({ msg: "Failed to retrieve user data", error });
   }
 };
+
 
 export const logOut = async (req, res) => {
   try {
